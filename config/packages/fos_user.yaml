@@ -1,0 +1,16 @@
+# config/packages/fos_user.yaml
+fos_user:
+  db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+  firewall_name: main
+  user_class: App\Entity\User
+  registration:
+    form:
+      type: App\Form\RegistrationType
+
+    confirmation:
+      template:   FOSUserBundle:Registration:email.txt.twig
+      enabled: true
+
+  from_email:
+    address: "test@domain.com"
+    sender_name: "test@domain.com"

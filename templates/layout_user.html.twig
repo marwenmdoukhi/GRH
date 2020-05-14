@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="{{asset('img/grh.jpg')}}">
+
+  <title>GRH</title>
+
+  <!-- vendor css -->
+
+
+  <link href="{{asset('lib/@fortawesome/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+  <link href="{{asset('lib/ionicons/css/ionicons.min.css')}}" rel="stylesheet">
+  <link href="{{asset('lib/select2/css/select2.min.css')}}" rel="stylesheet">
+
+  <!-- template css -->
+  <link rel="stylesheet" href="{{asset('assets/css/cassie.css')}}">
+
+</head>
+
+<body>
+{% for type, messages in app.session.flashBag.all %}
+  {% for message in messages %}
+    <div class="{{ type }}" style="display: none">
+      {{ message|trans({}, 'FOSUserBundle') }}
+    </div>
+  {% endfor %}
+{% endfor %}
+
+{% block fos_user_content %}
+{% endblock fos_user_content %}
+
+
+<script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('lib/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('lib/feather-icons/feather.min.js')}}"></script>
+<script src="{{asset('lib/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+<script src="{{asset('lib/select2/js/select2.min.js')}}"></script>
+
+{% block javascripts %}
+{% endblock javascripts %}
+</body>
+
+</html>
+

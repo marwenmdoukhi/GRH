@@ -1,0 +1,24 @@
+{% extends "layout_user.html.twig" %}
+
+{% block fos_user_content %}
+
+    <div class="forgot-panel">
+        <div class="forgot-body">
+            <img src="{{asset('img/grh.jpg')}}" class="img-fluid" alt="Responsive image">
+        </div>
+        <div class="forgot-sidebar">
+            <div class="forgot-sidebar-body">
+                <a href="#" class="sidebar-logo mg-b-40"><span>GRH</span></a>
+                <h4 class="forgot-title">Confirmation</h4>
+                <h5 class="forgot-subtitle">
+                    {{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }} ou vous foudra contacter l'administrateur.'
+
+                </h5>
+                <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-primary">Se connecter</a>
+            </div>
+        </div><!-- forgot-sidebar -->
+
+    </div><!-- forgot-panel -->
+
+
+{% endblock fos_user_content %}

@@ -1,0 +1,92 @@
+{% extends "layout_user.html.twig" %}
+
+{% block fos_user_content %}
+
+
+    <div class="signup-panel">
+        <img src="{{asset('img/grh.jpg')}}" class="img-fluid" alt="Responsive image">
+
+        <div class="signup-sidebar">
+            <div class="signup-sidebar-body">
+                <a href="#" class="sidebar-logo mg-b-40"><span>GRH</span></a>
+                <h4 class="signup-title">Créer un compte!</h4>
+
+                <div class="signup-form">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                {{ form_widget(form.name) }}
+                            </div>
+                        </div><!-- col -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                {{ form_widget(form.lastname) }}
+                            </div>
+                        </div><!-- col -->
+                    </div><!-- row -->
+
+                    <div class="row mg-b-5">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Adresse email</label>
+                                {{ form_widget(form.email) }}
+                                <h6 class="text-danger">{{ form_errors(form.email) }}</h6>
+                            </div>
+                        </div><!-- col -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                {{ form_widget(form.telephone) }}
+                            </div>
+                        </div><!-- col -->
+                    </div><!-- row -->
+
+                    <div class="row mg-b-5">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rôle</label>
+                                {{ form_widget(form.roles) }}
+                            </div>
+                        </div><!-- col -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ form_row(form.plainPassword) }}
+                            </div>
+                        </div><!-- col -->
+                    </div><!-- row -->
+
+                    <div class="form-group d-flex mg-b-0">
+                        <input type="submit" class="btn btn-brand-01 btn-uppercase btn-block" value="S'inscrire" />
+                    </div>
+
+                    <p class="mg-t-auto mg-b-0 tx-color-03">Avez-vous déja un compte? <a href="{{path('fos_user_security_login')}}">Se connecter</a></p>
+                    {{ form_end(form) }}
+                </div>
+
+            </div><!-- signup-sidebar-body -->
+        </div><!-- signup-sidebar -->
+
+    </div><!-- signup-panel -->
+
+{% endblock fos_user_content %}
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $('.select2').select2({});
+
+            $('#tol').tooltip();
+            $('#tolresulat').tooltip();
+            $("input[type='submit']").attr("disabled", false);
+            $("form").submit(function(){
+                $("input[type='submit']").attr("disabled", true);
+                $('#supp').addClass("disabled");
+                return true;
+            })
+        });
+    </script
+{% endblock javascripts %}
+
