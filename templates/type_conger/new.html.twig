@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TypeConger{% endblock %}
+
+{% block body %}
+
+    <div class=" content-body content-body-mail  ">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">        <a href="{{ path('type_conger_index') }}">back to list</a>
+                </li>
+                <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+            </ol>
+        </nav>
+        <div class="card card-hover card-task-one ">
+
+            {{ include('type_conger/_form.html.twig') }}
+
+        </div>
+    </div
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class=" content-body content-body-mail  ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style2">
+            <li class="breadcrumb-item">Liste des Users</li>
+            <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+        </ol>
+    </nav>
+    {{ form_start(edit_form) }}
+    <div class="card card-hover card-task-one ">
+        <div class="card-body content-header justify-content-between alert alert-primary">
+            <h5 class="section-title titshow " style="position:relative; top: 6px;"> Editer user</h5>
+            <div class="d-none d-sm-flex">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-outline-primary" value="Editer" />
+                        <a id="supp" class="tx-danger btn btn-outline-danger" href="{{ path('user_active') }}">Annuler</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pd-lg-x-20-f">
+                {{ form_widget(edit_form) }}
+                {{ form_end(edit_form) }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            $('#tolresulat').tooltip();
+            $('.select2').select2({});
+            $("input[type='submit']").attr("disabled", false);
+            $("form").submit(function(){
+                $("input[type='submit']").attr("disabled", true);
+                $('#supp').addClass("disabled");
+                return true;
+            })
+
+        });
+    </script>
+{% endblock %}
+

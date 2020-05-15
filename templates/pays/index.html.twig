@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pays index{% endblock %}
+
+{% block body %}
+<div class=" content-body content-body-mail  ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style2">
+            <li class="breadcrumb-item"></li>
+            <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+        </ol>
+    </nav>
+    <div class="card card-hover card-task-one ">
+        <div class="card-header bg-transparent content-header justify-content-between">
+            <h3 class="section-title titshow " style="position:relative; top: 6px;">Liste des Pays</h3>
+            <h3 class="section-title titshow " style="position:relative; top: 6px;">            <a href="{{ path('pays_new') }}">Ajouter Pays</a></h3>
+        </div>
+        <div class="table-responsive   pd-lg-25 ">
+            <table style="width: 100%" class="table table-inbox table-hover" id="example1">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pay in pays %}
+                    <tr>
+                        <td>{{ pay.id }}</td>
+                        <td>{{ pay.titre }}</td>
+                        <td>
+                            <a href="{{ path('pays_show', {'id': pay.id}) }}">  <i class=" tx-info  fas fa-eye  fa-lg" > </i>
+                            </a>
+
+                            <a href="{{ path('pays_edit', {'id': pay.id}) }}"><i class="far tx-success fa-edit fa-lg"> </i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block javascripts %}
+    <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net-dt/js/dataTables.dataTables.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js')}}"></script>
+
+    <script>
+        $('#example1').DataTable({
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+    </script>
+
+{% endblock %}
+
+

@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+{% endblock %}
+{% block body %}
+<div class=" content-body content-body-mail  ">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-style2">
+            <li class="breadcrumb-item"> <a href="{{ path('indexconger') }}"> Liste demande</a></li>
+            <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+        </ol>
+    </nav>
+    <div class="card card-hover card-task-one ">
+        <div class="card-header bg-transparent content-header justify-content-between">
+            <h3 class="section-title titshow " style="position:relative; top: 6px;">Demande Congée</h3>
+        </div>
+        {{ form_start(form)}}
+
+        <div class=" pd-lg-25 ">
+            <div class="row">
+                <div class="col-md-2">
+                    {{ form_row(form.debutConger) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(form.finConger) }}
+                </div>
+                <div class="col-md-2">
+                    {{ form_row(form.nbjours) }}
+                </div>
+                <div class="col-md-3">
+                    {{ form_row(form.typeConger) }}
+                </div>
+                <div class="col-md-2">
+                    <label>certificat médical</label>
+                    {{ form_row(form.fichier) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_row(form.cause) }}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">ajouter</button>
+         </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(document).ready(function(){
+                const dateSelect = $('#demande_conger_finConger, #demande_conger_debutConger');
+                dateSelect.datepicker({
+                    format: 'dd/mm/yyyy',
+                    startDate: new Date()
+                });
+
+            });
+
+            $("input[type='submit']").attr("disabled", false);
+            $("form").submit(function(){
+                $("input[type='submit']").attr("disabled", true);
+                $('#supp').addClass("disabled");
+                return true;
+            })
+        });
+    </script>
+
+
+{% endblock %}

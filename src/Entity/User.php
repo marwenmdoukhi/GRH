@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -70,19 +71,40 @@ class User extends BaseUser
      */
     protected $codepostale;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nbConger", type="integer", nullable=true)
+     */
+    protected $nbConger;
+
 
     /**
      * @ORM\ManyToOne( targetEntity="App\Entity\Pays", inversedBy="userpays")
      * @ORM\JoinColumn(nullable=true)
      */
     private $pays;
-    
 
 
-    public function __construct()
-    {
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Conger", mappedBy="demandeur")
+     */
+    private $userdemande;
+
+
+
+    /**
+     * @ORM\Column(type="datetime",nullable=true)
+     */
+    private $createdAt;
+
+    public function __construct() {
         parent::__construct();
-        // your own logic
+        $this->setPhoto('inconnu.png');
+        $this->createdAt= new \DateTime();
+        $this->nbConger="21";
+
     }
 
     public function getId(): ?int
@@ -174,6 +196,30 @@ class User extends BaseUser
         return $this;
     }
 
+    public function getNbConger(): ?int
+    {
+        return $this->nbConger;
+    }
+
+    public function setNbConger(?int $nbConger): self
+    {
+        $this->nbConger = $nbConger;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
     public function getPays(): ?Pays
     {
         return $this->pays;
@@ -186,8 +232,27 @@ class User extends BaseUser
         return $this;
     }
 
-    public function setEmail($email) {
-        parent::setEmail($email);
-        $this->setUsername($email);
+    public function getUserdemande(): ?Conger
+    {
+        return $this->userdemande;
     }
+
+    public function setUserdemande(?Conger $userdemande): self
+    {
+        $this->userdemande = $userdemande;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newDemandeur = null === $userdemande ? null : $this;
+        if ($userdemande->getDemandeur() !== $newDemandeur) {
+            $userdemande->setDemandeur($newDemandeur);
+        }
+
+        return $this;
+    }
+
+
+
+
+
+
 }

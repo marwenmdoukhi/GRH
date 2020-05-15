@@ -1,0 +1,29 @@
+<h5>Mes Informations</h5>
+<hr>
+<div class="form-settings">
+
+    {{ form_start(edit_form) }}
+    {{ form_widget(edit_form) }}
+    <input type="submit" class="btn btn-brand-01" value="Modifier" />
+    {{ form_end(edit_form) }}
+</div>
+
+
+<script>
+    $('.select2').select2({});
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        url= "{{ path('user_edit',{'id':app.user.id})}}";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function (result) {
+
+                     window.location.reload();
+
+            }
+        });
+
+    });
+</script>

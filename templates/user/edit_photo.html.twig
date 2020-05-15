@@ -1,0 +1,35 @@
+<h5>Photo</h5>
+<hr>
+<div class="profile-sidebar-header ">
+    <div class="avatar">
+        <img src="{{asset('uploads/'~app.user.photo)}}" class="rounded-circle" alt="">
+    </div>
+
+    <h5>{{ app.user.name }} {{ app.user.lastname }}</h5>
+
+    <div class="mg-t-20 justify-content-center">
+
+        <form id="MedicalBundle_user" method="post" action="{{ path('user_edit_photo',{'id':app.user.id})}}" enctype="multipart/form-data">
+            {{ form_widget(edit_form) }}
+            <input type="submit" class="btn btn-block btn-brand-01" value="Modifier ma photo" />
+        </form>
+    </div>
+    </div>
+
+<script>
+    $('#MedicalBundle_user').on('submit', function (e) {
+        e.preventDefault();
+        url = $('form').attr('action');
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (result) {
+                window.location.reload();
+            }
+        });
+    });
+</script>
