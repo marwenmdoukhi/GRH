@@ -42,13 +42,7 @@ class DemandeCongerType extends AbstractType
                         ' autocomplete'=>"off"
                     ]
             ))
-            ->add('nbjours',IntegerType::class,[
-                'label'=>' Durée',
-                'attr'=>[
-                    'min'=>0,
-                    ' autocomplete'=>"off"
 
-                ]])
             ->add('typeConger',EntityType::class,[
                  'multiple'=>false,
                 'label'=>'choisissez Type De conger',

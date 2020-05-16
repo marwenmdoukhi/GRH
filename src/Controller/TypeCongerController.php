@@ -75,8 +75,7 @@ class TypeCongerController extends AbstractController
 
         $typeConger = $em->getRepository('App:TypeConger')->find($id);
 
-        $em = $this->getDoctrine()->getManager();
-        $typeConger = $em->getRepository('App:Pays')->find($id);
+
         $form = $this->createForm(TypeCongerType::class, $typeConger);
         $form->handleRequest($request);
 

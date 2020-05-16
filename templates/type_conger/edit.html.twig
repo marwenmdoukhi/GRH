@@ -3,11 +3,25 @@
 {% block title %}Edit TypeConger{% endblock %}
 
 {% block body %}
-    <h1>Edit TypeConger</h1>
 
-    {{ include('type_conger/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('type_conger_index') }}">back to list</a>
+    <div class=" content-body content-body-mail  ">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item"> <a href="{{ path('type_conger_index') }}">back to list</a>
 
-    {{ include('type_conger/_delete_form.html.twig') }}
+                </li>
+                <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+            </ol>
+        </nav>
+        <div class="card card-hover card-task-one ">
+            {{ include('type_conger/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="ml-4" style="position: relative; bottom: 20px;">
+                {{ include('type_conger/_delete_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}

@@ -37,11 +37,6 @@ class Conger
      */
     private $finConger;
 
-    /**
-     *
-     * @ORM\Column(name="nbjours", type="integer")
-     */
-    private $nbjours ;
 
 
     /**
@@ -115,17 +110,7 @@ class Conger
         return $this;
     }
 
-    public function getNbjours(): ?int
-    {
-        return $this->nbjours;
-    }
 
-    public function setNbjours(int $nbjours): self
-    {
-        $this->nbjours = $nbjours;
-
-        return $this;
-    }
 
     public function getCause(): ?string
     {
