@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Pays;
 use App\Form\PaysType;
 use App\Repository\PaysRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,8 @@ class PaysController extends AbstractController
 
     /**
      * @Route("/new", name="pays_new", methods={"GET","POST"})
+     *      *     * @Security("has_role('ROLE_SUPER_ADMIN')")
+
      */
     public function new(Request $request): Response
     {

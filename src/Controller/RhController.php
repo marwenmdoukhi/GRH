@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +14,8 @@ class RhController extends AbstractController
     /**
      * @return Response
      *  @Route("/rh/users", name="emplusers")
+     *     * @Security("has_role('ROLE_ROS')")
+
      */
     public function active() {
         $em = $this->getDoctrine()->getManager();
@@ -28,6 +31,8 @@ class RhController extends AbstractController
      * @param $id
      * @return RedirectResponse|Response
      * @Route("/rh/activer/{id}", name="employactiver")
+     *      *     * @Security("has_role('ROLE_ROS')")
+
      */
     public function show($id) {
         $em = $this->getDoctrine()->getManager();

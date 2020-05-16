@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\TypeConger;
 use App\Form\TypeCongerType;
 use App\Repository\TypeCongerRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,8 @@ class TypeCongerController extends AbstractController
      * @Route("/", name="type_conger_index", methods={"GET"})
      * @param TypeCongerRepository $typeCongerRepository
      * @return Response
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
+
      */
     public function index(TypeCongerRepository $typeCongerRepository): Response
     {
@@ -31,6 +34,8 @@ class TypeCongerController extends AbstractController
      * @Route("/new", name="type_conger_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
+     *      * @Security("has_role('ROLE_SUPER_ADMIN')")
+
      */
     public function new(Request $request): Response
     {
@@ -68,6 +73,8 @@ class TypeCongerController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="type_conger_edit", methods={"GET","POST"})
+     *      * @Security("has_role('ROLE_SUPER_ADMIN')")
+
      */
     public function edit(Request $request,$id): Response
     {
@@ -96,6 +103,8 @@ class TypeCongerController extends AbstractController
      * @param Request $request
      * @param TypeConger $typeConger
      * @return Response
+     *      * @Security("has_role('ROLE_SUPER_ADMIN')")
+
      */
     public function delete(Request $request, $id): Response
     {
