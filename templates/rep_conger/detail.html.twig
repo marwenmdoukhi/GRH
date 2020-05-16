@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RepCongerController!{% endblock %}
+
+{% block body %}
+
+
+    <div class=" content-body content-body-mail  ">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item"><a href="{{ path('rep_conger') }}">Demandes des congés</a> </li>
+                <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+            </ol>
+        </nav>
+
+            <div class="card-body content-header justify-content-between alert alert-primary">
+                <h5 class="section-title titshow " style="position:relative; top: 6px;"> Nouvelle Demande </h5>
+                <div class="d-none d-sm-flex">
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% if conge.status == "0" %}
+                            <a class="btn btn-success" href="{{ path('accepter',{'id':conge.id}) }}">Accepter</a>
+                             <a class="btn btn-danger" href="{{ path('refuser',{'id':conge.id}) }}">Refuser</a>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+        </div>
+            <div  style="position: relative; bottom: 20px;"  class="  card card-hover card-task-one pd-lg-20 ">
+                <div class="d-flex mt-2">
+                    <div class=" mt-2 col-md-3">
+                        <h6 >Type De Conge </h6>
+                    </div>
+                    <div class=" form-control col-md-9">
+                        {{ conge.typeConger.titre }}
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class=" mt-2 col-md-3">
+                        <h6 >Période </h6>
+                    </div>
+                    <div class=" form-control col-md-9">
+                         {{ conge.getperiode }}
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class=" mt-2 col-md-3">
+                        <h6 >Cause </h6>
+                    </div>
+                    <div class=" form-control col-md-9">
+                        {{ conge.cause }}
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class=" mt-2 col-md-3">
+                        <h6 >Certificat médical </h6>
+                    </div>
+                    <div class=" form-control col-md-9">
+                        {% if conge.fichier != null %}
+                            <a href="{{ path('certif',{'id':conge.id}) }}" target="_blank" id="mailComposeBtn" >  <i class="text-center fa-lg tx-danger fas fa-file-pdf"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="d-flex mt-2">
+                    <div class=" mt-2 col-md-3">
+                        <h6 >Status </h6>
+                    </div>
+                    <div class=" form-control col-md-9">
+
+                        {% if  conge.status == "1"  %}
+                            <span class="badge badge-success">Accepter</span>
+                        {% elseif conge.status == "2" %}
+                            <span class="badge badge-danger">Réfuser</span>
+                        {% endif %}
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        $('#example1').DataTable({
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+
+    </script>
+
+{% endblock %}
+

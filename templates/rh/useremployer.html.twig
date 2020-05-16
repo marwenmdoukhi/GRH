@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class=" content-body content-body-mail  ">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+            </ol>
+        </nav>
+        <div class="card card-hover card-task-one ">
+            <div class="card-header bg-transparent content-header justify-content-between">
+                <h3 class="section-title titshow " style="position:relative; top: 6px;">Liste des Utilisateurs</h3>
+                <div class="pd-10 ">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" onclick="myFunction()">
+                        <label class="custom-control-label" for="customCheck1">Inactifs</label>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row-reverse ">
+
+            </div>
+
+            <div id="actif" class="table-responsive   pd-lg-25 ">
+                <table style="width: 100%" class="table table-inbox table-hover" id="example1">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de création</th>
+                        <th>Téléphone</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.createdAt |date }}</td>
+                            <td>{{ user.telephone }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% for role in user.roles %}
+                                    {% if role == 'ROLE_EMPLOYE' %}
+                                        EMPLOYE
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <div class="pull-right">
+                                    {%if user.enabled %}
+                                        <a href="{{ path('employactiver', { 'id': user.id }) }}"><i class="fas tx-success fa-check fa-lg"></i></a>
+                                    {% else %}
+                                        <a href="{{ path('employactiver', { 'id': user.id }) }}"><i class="tx-danger fas fa-lg fa-times "></i></a>
+                                    {% endif%}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: none" id="desctiver" class="table-responsive   pd-lg-25 ">
+                <table style="width: 100%" class="table table-inbox table-hover" id="dataTables-desctiver">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de création</th>
+                        <th>Téléphone</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        {%if user.enabled == false %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.createdAt|date }}</td>
+                                <td>{{ user.telephone }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% for role in user.roles %}
+                                        {% if role == 'ROLE_EMPLOYE' %}
+                                            EMPLOYE
+                                        {% endif %}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    <div class="pull-right">
+                                        {%if user.enabled %}
+                                            <a href="{{ path('employactiver', { 'id': user.id }) }}"><i class="fas tx-success fa-check fa-lg"></i></a>
+                                        {% else %}
+                                            <a href="{{ path('employactiver', { 'id': user.id }) }}"><i class="tx-danger fas fa-lg fa-times "></i></a>
+                                        {% endif%}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset('lib/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net-dt/js/dataTables.dataTables.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js')}}"></script>
+    <script>
+        function myFunction() {
+            var checkBox = document.getElementById("customCheck1");
+            var actif = document.getElementById("actif");
+            var desctiver = document.getElementById("desctiver");
+
+            if (checkBox.checked == true) {
+                actif.style.display = "none";
+                desctiver.style.display = "block";
+
+
+            } else {
+                actif.style.display = "block";
+                desctiver.style.display = "none"
+            }
+        }
+    </script>
+    <script>
+        $('#example1').DataTable({
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+    </script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+

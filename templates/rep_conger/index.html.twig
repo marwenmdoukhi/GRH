@@ -3,18 +3,290 @@
 {% block title %}Hello RepCongerController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/dev/Ing ISIL/Gestion ressources humaines/src/Controller/RepCongerController.php'|file_link(0) }}">src/Controller/RepCongerController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/dev/Ing ISIL/Gestion ressources humaines/templates/rep_conger/index.html.twig'|file_link(0) }}">templates/rep_conger/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class=" content-body content-body-mail  ">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item"></li>
+                <li class="breadcrumb-item active tx-primary " aria-current="page"></li>
+            </ol>
+        </nav>
+        <div class=" card-hover card-deal ">
+            <div class="card-body pd-0   ">
+                <div class="row row-sm content-body ">
+                    <div class="col-sm-4 col-xl mt-2">
+                        <a href="javascript:visibilite('div_texte1');" data-indice='reponse'  class="datatables">
+                            <div class="card card-hover card-social-one">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mg-b-10">
+                                        <h1 class="card-value">{{ conge |length }}</h1>
+                                        <div class="chart-wrapper ">
+                                            <i class="  fa fa-users  fa-4x tx-primary feather feather-help-circle" style="direction: ltr; position: absolute; right: 10px; top: 0px; width: 60px; height: 40px;"></i>
+                                        </div>
+                                    </div>
+                                    <h5 class="card-title tx-primary">Demandes Congées </h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 col-xl mg-t-15 mg-sm-t-0 mt-2">
+                        <a href="javascript:visibilite('div_texte2');" data-indice='accepter'  class="datatables">
+                            <div class="card card-hover card-social-one">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mg-b-10">
+                                        <h1 class="card-value">{{demandeaccepter|length}}</h1>
+                                        <div class="chart-wrapper">
+                                            <i  class="  fa fa-user-plus  fa-4x tx-primary feather feather-help-circle" style="direction: ltr; position: absolute; right: 10px; top: 0px; width: 60px; height: 40px; color: #20c997"></i>
+                                        </div>
+                                    </div>
+                                    <h5 class="card-title tx-teal">Demande Acceptées </h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 col-xl mg-t-15 mg-sm-t-0 mt-2 ">
+                        <a href="javascript:visibilite('div_texte3');" data-indice='refuser'  class="datatables">
+                            <div class="card card-hover card-social-one">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mg-b-10">
+                                        <h1 class="card-value">{{demanderefuser|length}}</h1>
+                                        <div class="chart-wrapper">
+                                            <i  class="  fas fa-user-times fa-4x tx-primary feather feather-help-circle" style="direction: ltr; position: absolute; right: 10px; top: 0px; width: 60px; height: 40px; color: #e83e8c"></i>
+                                        </div>
+                                    </div>
+                                    <h5 class="card-title tx-pink">Demande refusées </h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 col-xl mg-t-15 mg-sm-t-0 mt-2">
+                        <a href="javascript:visibilite('div_texte4');" data-indice='enattend'  class="datatables">
+                            <div class="card card-hover card-social-one">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center justify-content-between mg-b-10">
+                                        <h1 class="card-value">{{demandenattend|length}}</h1>
+                                        <div class="chart-wrapper">
+                                            <i  class=" fas fa-user-clock  fa-4x tx-primary feather feather-help-circle" style="direction: ltr; position: absolute; right: 10px; top: 0px; width: 60px; height: 40px; color: #ffc107"></i>
+                                        </div>
+                                    </div>
+                                    <h5 class=" card-title tx-warning ">Demande en Attentes</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="table-responsive mt-2 content-body">
+                    <div id="div_texte1" >
+                        <h5 class="card-title tx-primary">Demande Envoyées</h5>
+                        <table style="width: 100%" class="table table-inbox table-hover" id="example1">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Utilisateur</th>
+                                <th>Email</th>
+                                <th>Telephone</th>
+                                <th>Date Debut </th>
+                                <th>Date Fin </th>
+                                <th>Période</th>
+                                <th>Statu</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for conge in conge %}
+                                <tr>
+                                    <td>{{ conge.id }}</td>
+                                    <td>{{ conge.demandeur.name }} {{ conge.demandeur.lastname }}</td>
+                                    <td>{{ conge.demandeur.email }}</td>
+                                    <td>{{ conge.demandeur.telephone }}</td>
+                                    <td>{{ conge.debutConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                    <td>{{ conge.finConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                    <td> {{ conge.getperiode }}</td>
+                                    <td>{% if conge.status == "0" %}
+                                            <span class="badge badge-warning">En Attend</span>
+                                        {% elseif  conge.status == "1"  %}
+                                            <span class="badge badge-success">Accepter</span>
+                                        {% else%}
+                                            <span class="badge badge-danger">Réfuser</span>
+                                        {% endif %}
+                                    </td>
+                                    <td> <a href="{{ path('detailconge',{'id':conge.id}) }}">plus de détails</a> </td>
+                                </tr>
+                            {% endfor %}
+
+                        </table>
+                    </div>
+                    <div id="div_texte2" style="display:none;">
+                        <h5 class="card-title tx-teal">Demande Acceptées </h5>
+                        <table style="width: 100%" class="table table-inbox table-hover" id="example2">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Utilisateur</th>
+                                <th>Email</th>
+                                <th>Telephone</th>
+                                <th>Date Debut </th>
+                                <th>Date Fin </th>
+                                <th>Période</th>
+                                <th>Statu</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for conge in conge %}
+                                {% if conge.status == "1" %}
+                                <tr>
+                                    <td>{{ conge.id }}</td>
+                                    <td>{{ conge.demandeur.name }} {{ conge.demandeur.lastname }}</td>
+                                    <td>{{ conge.demandeur.email }}</td>
+                                    <td>{{ conge.demandeur.telephone }}</td>
+                                    <td>{{ conge.debutConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                    <td>{{ conge.finConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                    <td> {{ conge.getperiode }}</td>
+                                    <td>{% if conge.status == "0" %}
+                                            <span class="badge badge-warning">En Attend</span>
+                                        {% elseif  conge.status == "1"  %}
+                                            <span class="badge badge-success">Accepter</span>
+                                        {% else%}
+                                            <span class="badge badge-danger">Réfuser</span>
+                                        {% endif %}
+                                    </td>
+                                    <td> <a href="{{ path('detailconge',{'id':conge.id}) }}">plus de détails</a> </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+
+                        </table>
+                    </div>
+                    <div id="div_texte3" style="display:none;">
+                        <h5 class="card-title tx-pink">Demande refusées</h5>
+                        <table style="width: 100%" class="table table-inbox table-hover" id="example3">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Utilisateur</th>
+                                <th>Email</th>
+                                <th>Telephone</th>
+                                <th>Date Debut </th>
+                                <th>Date Fin </th>
+                                <th>Période</th>
+                                <th>Statu</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for conge in conge %}
+                                {% if conge.status == "2" %}
+                                    <tr>
+                                        <td>{{ conge.id }}</td>
+                                        <td>{{ conge.demandeur.name }} {{ conge.demandeur.lastname }}</td>
+                                        <td>{{ conge.demandeur.email }}</td>
+                                        <td>{{ conge.demandeur.telephone }}</td>
+                                        <td>{{ conge.debutConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                        <td>{{ conge.finConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                        <td> {{ conge.getperiode }}</td>
+                                        <td>{% if conge.status == "0" %}
+                                                <span class="badge badge-warning">En Attend</span>
+                                            {% elseif  conge.status == "1"  %}
+                                                <span class="badge badge-success">Accepter</span>
+                                            {% else%}
+                                                <span class="badge badge-danger">Réfuser</span>
+                                            {% endif %}
+                                        </td>
+                                        <td> <a href="{{ path('detailconge',{'id':conge.id}) }}">plus de détails</a> </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+
+                        </table>
+
+                    </div>
+                    <div id="div_texte4" style="display:none;">
+                        <h5 class=" card-title tx-warning ">Demande en Attentes</h5>
+                        <table style="width: 100%" class="table table-inbox table-hover" id="example4">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Utilisateur</th>
+                                <th>Email</th>
+                                <th>Telephone</th>
+                                <th>Date Debut </th>
+                                <th>Date Fin </th>
+                                <th>Période</th>
+                                <th>Statu</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for conge in conge %}
+                                {% if conge.status == "0" %}
+                                    <tr>
+                                        <td>{{ conge.id }}</td>
+                                        <td>{{ conge.demandeur.name }} {{ conge.demandeur.lastname }}</td>
+                                        <td>{{ conge.demandeur.email }}</td>
+                                        <td>{{ conge.demandeur.telephone }}</td>
+                                        <td>{{ conge.debutConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                        <td>{{ conge.finConger|localizeddate('none', 'none', null, null, 'dd/MM/Y') }}</td>
+                                        <td> {{ conge.getperiode }}</td>
+                                        <td>{% if conge.status == "0" %}
+                                                <span class="badge badge-warning">En Attend</span>
+                                            {% elseif  conge.status == "1"  %}
+                                                <span class="badge badge-success">Accepter</span>
+                                            {% else%}
+                                                <span class="badge badge-danger">Réfuser</span>
+                                            {% endif %}
+                                        </td>
+                                        <td> <a href="{{ path('detailconge',{'id':conge.id}) }}">plus de détails</a> </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 {% endblock %}
+
+{% block javascripts %}
+
+
+    <script>
+        var divPrecedent=document.getElementById('div_texte1');
+        function visibilite(divId)
+        {
+            divPrecedent.style.display='none';
+            divPrecedent=document.getElementById(divId);
+            divPrecedent.style.display='';
+        }
+    </script>
+    <script>
+        $('#example1').DataTable({
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
+        });
+        $('a[data-confirm]').click(function (ev) {
+            var href = $(this).attr('href');
+            if (!$('#dataConfirmModal').length) {
+                $('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">Merci de confirmer</h3></div><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Non</button><a class="btn btn-danger" id="dataConfirmOK">Oui</a></div></div></div></div>');
+            }
+            $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+            $('#dataConfirmOK').attr('href', href);
+            $('#dataConfirmModal').modal({show: true});
+            return false;
+        });
+    </script>
+
+{% endblock %}
+

@@ -31,7 +31,7 @@
                 <li class="nav-item ">
                     <a href="{{ path('user_active') }}" class="nav-link with-sub "><i data-feather="layout"></i> Les utilisateur</a>
                     <nav class="nav nav-sub">
-                        <a href="{{ path('user_active') }}" class="nav-sub-link">utilisateur</a>
+                        <a href="{{ path('user_active') }}" class="nav-sub-link">Utilisateur</a>
                     </nav>
                 </li>
                 <li class="nav-item show">
@@ -43,7 +43,7 @@
                 <li class="nav-item show">
                     <a href="" class="nav-link with-sub "><i data-feather="layout"></i>les Types Congés</a>
                     <nav class="nav nav-sub">
-                        <a href="{{ path('type_conger_index') }}" class="nav-sub-link">Ajouter  Types congés</a>
+                        <a href="{{ path('type_conger_index') }}" class="nav-sub-link">Ajouter Types </a>
                     </nav>
                 </li>
             </ul>
@@ -57,12 +57,19 @@
                 </li>
             </ul>
 
-            {% elseif is_granted('ROLE_RH') %}
+            {% elseif is_granted('ROLE_ROS') %}
                 <ul class="nav nav-sidebar">
+
+                    <li class="nav-item ">
+                        <a href="{{ path('emplusers') }}" class="nav-link with-sub "><i data-feather="layout"></i> Les utilisateur</a>
+                        <nav class="nav nav-sub">
+                            <a href="{{ path('emplusers') }}" class="nav-sub-link">Utilisateur</a>
+                        </nav>
+                    </li>
                     <li class="nav-item show">
                         <a href="" class="nav-link with-sub "><i data-feather="layout"></i>Listes Demandes Congés</a>
                         <nav class="nav nav-sub">
-                            <a href="{{ path('rep_conger') }}" class="nav-sub-link">Listes Demandes Congés</a>
+                            <a href="{{ path('rep_conger') }}" class="nav-sub-link">Demandes Congés</a>
                         </nav>
                     </li>
                 </ul>
@@ -81,23 +88,32 @@
                 <div class="dropdown dropdown-loggeduser">
                     <a href="" class="dropdown-link" data-toggle="dropdown">
                         <div class="avatar avatar-sm">
+                            {% if app.user.photo == null %}
+                            <img src="{{asset('img/inc.jfif')}}" class="rounded-circle" alt="">
+
+                            {% else %}
                             <img src="{{asset('uploads/'~app.user.photo)}}" class="rounded-circle" alt="">
+                            {% endif %}
                         </div><!-- avatar -->
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-menu-header">
                             <div class="media align-items-center">
                                 <div class="avatar">
-                                    <img src="{{asset('uploads/'~app.user.photo)}}" class="rounded-circle" alt="">
-                                </div><!-- avatar -->
+                                    {% if app.user.photo == null %}
+                                        <img src="{{asset('img/inc.jfif')}}" class="rounded-circle" alt="">
+
+                                    {% else %}
+                                        <img src="{{asset('uploads/'~app.user.photo)}}" class="rounded-circle" alt="">
+                                    {% endif %}                                </div><!-- avatar -->
                                 <div class="media-body mg-l-10">
                                     <h6>{{ app.user.name}} {{ app.user.lastname}}</h6>
                                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                                         Administrateur
                                     {% elseif is_granted('ROLE_EMPLOYE') %}
                                         Employée
-                                    {% elseif is_granted('ROLE_RH') %}
-                                        RH
+                                    {% elseif is_granted('ROLE_ROS') %}
+                                        ressource humaine
                                     {% endif %}
 
                                 </div>

@@ -33,14 +33,20 @@ class AfterLoginRedirection implements AuthenticationSuccessHandlerInterface
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-
-       if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
+        if
+        ($this->security->isGranted('ROLE_ROS')) {
+            $response = new RedirectResponse($this->router->generate('rep_conger'));
+        }
+        elseif ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
            $response = new RedirectResponse($this->router->generate('user_active'));
        }
        elseif
          ($this->security->isGranted('ROLE_EMPLOYE')) {
-            $response = new RedirectResponse($this->router->generate('demande_conger'));
-        } else {
+            $response = new RedirectResponse($this->router->generate('indexconger'));
+        }
+
+
+       else {
             $referer_url = $request->headers->get('referer');
 
             $response = new RedirectResponse($referer_url);

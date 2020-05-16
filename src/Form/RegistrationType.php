@@ -30,7 +30,7 @@ class RegistrationType extends AbstractType
                 'choices' => [
                     '' => NULL,
                     'employer' => 'ROLE_EMPLOYE',
-                    'rh' => 'ROLE_RH ',
+                    'ressource humaine' => 'ROLE_ROS',
                 ]
             ))
 

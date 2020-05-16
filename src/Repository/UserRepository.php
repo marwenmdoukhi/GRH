@@ -19,6 +19,16 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
+
+    public function userEmploye(){
+        $role = "ROLE_EMPLOYE";
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles LIKE :role')
+            ->setParameter('role', '%' .$role. '%')
+            ->getQuery()
+            ->getResult();
+
+    }
     // /**
     //  * @return Conger[] Returns an array of Conger objects
     //  */

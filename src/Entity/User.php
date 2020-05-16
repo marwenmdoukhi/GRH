@@ -95,7 +95,6 @@ class User extends BaseUser
 
     public function __construct() {
         parent::__construct();
-        $this->setPhoto('inconnu.png');
         $this->createdAt= new \DateTime();
 
     }

@@ -75,6 +75,15 @@ class Conger
     private  $repundu;
 
 
+    public function getperiode()
+    {
+
+        $dub=$this->getDebutConger();
+        $fin= $this->getFinConger();
+        $now = new \DateTime('now');
+        return $dub->diff($this->finConger)->format("%a jours");
+
+    }
     /**
      * @var string
      *
