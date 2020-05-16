@@ -46,7 +46,7 @@ class RhController extends AbstractController
         }
         $em->persist($user);
         $em->flush();
-        return $this->redirectToRoute('user_active');
+        return $this->redirectToRoute('emplusers');
     }
 
 
