@@ -71,12 +71,6 @@ class User extends BaseUser
      */
     protected $codepostale;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nbConger", type="integer", nullable=true)
-     */
-    protected $nbConger;
 
 
     /**
@@ -103,7 +97,6 @@ class User extends BaseUser
         parent::__construct();
         $this->setPhoto('inconnu.png');
         $this->createdAt= new \DateTime();
-        $this->nbConger="21";
 
     }
 
@@ -196,17 +189,6 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getNbConger(): ?int
-    {
-        return $this->nbConger;
-    }
-
-    public function setNbConger(?int $nbConger): self
-    {
-        $this->nbConger = $nbConger;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -251,7 +233,10 @@ class User extends BaseUser
     }
 
 
-
+    public function setEmail($email) {
+        parent::setEmail($email);
+        $this->setUsername($email);
+    }
 
 
 

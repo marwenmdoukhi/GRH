@@ -47,11 +47,9 @@
                     {% endif %}
                 </td>
                 <td>{% if mesdemande.status == "0" %}
-                    <a  href="{{ path('deleteconger', { 'id': mesdemande.id }) }}">  <i class=" tx-danger far fa-lg fa-trash-alt"> </i></a>
-                        <a  href="{{ path('editdemandeconger', { 'id': mesdemande.id }) }}">  <i class=" tx-success far fa-edit fa-lg "> </i></a>
-
+                    <a   data-confirm="Etes-vous certain de vouloir supprimer?"    href="{{ path('deleteconger', { 'id': mesdemande.id }) }}">  <i class=" tx-danger far fa-lg fa-trash-alt"> </i></a>
+                        <a href="{{ path('editdemandeconger', { 'id': mesdemande.id }) }}">  <i class=" tx-success far fa-edit fa-lg "> </i></a>
                     {% endif %}
-
                 </td>
 
             </tr>
@@ -80,6 +78,16 @@
                 sSearch: '',
                 lengthMenu: '_MENU_ items/page',
             }
+        });
+        $('a[data-confirm]').click(function (ev) {
+            var href = $(this).attr('href');
+            if (!$('#dataConfirmModal').length) {
+                $('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">Merci de confirmer</h3></div><div class="modal-body"></div><div class="modal-footer"><button class="btn" data-dismiss="modal" aria-hidden="true">Non</button><a class="btn btn-danger" id="dataConfirmOK">Oui</a></div></div></div></div>');
+            }
+            $('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+            $('#dataConfirmOK').attr('href', href);
+            $('#dataConfirmModal').modal({show: true});
+            return false;
         });
     </script>
 

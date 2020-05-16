@@ -10,7 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseRegistrationFormType;
-use AppBundle\Form\DataTransformer\StringToArrayTransformer;
 
 class RegistrationType extends AbstractType
 {

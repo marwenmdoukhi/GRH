@@ -56,6 +56,16 @@
                     </nav>
                 </li>
             </ul>
+
+            {% elseif is_granted('ROLE_RH') %}
+                <ul class="nav nav-sidebar">
+                    <li class="nav-item show">
+                        <a href="" class="nav-link with-sub "><i data-feather="layout"></i>Listes Demandes Congés</a>
+                        <nav class="nav nav-sub">
+                            <a href="{{ path('rep_conger') }}" class="nav-sub-link">Listes Demandes Congés</a>
+                        </nav>
+                    </li>
+                </ul>
             {% endif %}
         </div><!-- sidebar-body -->
     </div><!-- sidebar -->
@@ -68,20 +78,6 @@
             </div><!-- header-left -->
 
             <div class="header-right">
-                <div class="dropdown dropdown-notification">
-                    <a href="" class="dropdown-link new" data-toggle="dropdown"><i data-feather="bell"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-menu-header">
-                            <h6>Notifications</h6>
-                            <a href=""><i data-feather="more-vertical"></i></a>
-                        </div><!-- dropdown-menu-header -->
-                        <div class="dropdown-menu-body">
-                        </div><!-- dropdown-menu-body -->
-                        <div class="dropdown-menu-footer">
-                            <a href="">View All Notifications</a>
-                        </div>
-                    </div><!-- dropdown-menu -->
-                </div>
                 <div class="dropdown dropdown-loggeduser">
                     <a href="" class="dropdown-link" data-toggle="dropdown">
                         <div class="avatar avatar-sm">
